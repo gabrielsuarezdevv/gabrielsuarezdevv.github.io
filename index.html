@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+<!-- ============================================================
+     PORTFOLIO DE GABRIEL - DESARROLLADOR WEB FULL STACK
+     Página personal con diseño oscuro, fondo animado WebGL,
+     secciones de presentación, proyectos y contacto.
+     Idioma principal: Español | Framework CSS: Tailwind CDN
+     ============================================================ -->
+
+<html class="scroll-smooth" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Gabriel | Web Developer Portfolio</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#05170e",
+                        "outline-variant": "#434844",
+                        "on-primary-fixed-variant": "#3a4b40",
+                        "tertiary-fixed-dim": "#c4c7c6",
+                        "on-tertiary-fixed-variant": "#444747",
+                        "on-secondary-fixed": "#101e18",
+                        "on-surface": "#d2e8d8",
+                        "tertiary": "#c4c7c6",
+                        "on-error": "#690005",
+                        "tertiary-container": "#252828",
+                        "background": "#05170e",
+                        "secondary-fixed-dim": "#bacac1",
+                        "secondary": "#bacac1",
+                        "on-background": "#d2e8d8",
+                        "on-tertiary-container": "#8c8f8e",
+                        "tertiary-fixed": "#e1e3e2",
+                        "primary-container": "#1b2b22",
+                        "on-secondary": "#25332d",
+                        "primary-fixed-dim": "#b8cbbe",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#d2e8d8",
+                        "surface-container-highest": "#26392e",
+                        "on-primary": "#24342b",
+                        "on-secondary-container": "#acbcb3",
+                        "surface-container": "#112319",
+                        "on-primary-fixed": "#0f1f16",
+                        "surface-container-lowest": "#011109",
+                        "secondary-fixed": "#d6e7dc",
+                        "surface-bright": "#2a3d32",
+                        "on-tertiary-fixed": "#191c1c",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#1b2e24",
+                        "outline": "#8d928d",
+                        "on-surface-variant": "#c3c8c2",
+                        "surface-variant": "#26392e",
+                        "surface-tint": "#b8cbbe",
+                        "inverse-primary": "#516257",
+                        "on-primary-container": "#819387",
+                        "surface-container-low": "#0c1f16",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#05170e",
+                        "primary": "#b8cbbe",
+                        "inverse-on-surface": "#22342a",
+                        "on-tertiary": "#2e3131",
+                        "secondary-container": "#3d4c45",
+                        "primary-fixed": "#d4e7d9",
+                        "on-secondary-fixed-variant": "#3b4a43",
+                        "off-white": "#fbf9f8",
+                        "soft-mint": "#dbdad9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "unit": "8px",
+                        "margin-mobile": "24px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "gutter": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Source Sans 3"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-md": ["Source Sans 3"],
+                        "display": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Source Sans 3"],
+                        "label-sm": ["Source Sans 3"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* ── ESTILOS MEJORADOS PARA EL FORMULARIO DE CONTACTO ── */
+        .contact-input {
+            width: 100%;
+            background-color: rgba(27, 46, 36, 0.6);  /* surface-container-high con opacidad */
+            border: 1px solid rgba(67, 72, 68, 0.6);   /* outline-variant con opacidad */
+            color: #ffffff;                             /* off-white */
+            padding: 12px 16px;
+            border-radius: 2px;
+            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 16px;
+        }
+
+        .contact-input::placeholder {
+            color: rgba(186, 202, 193, 0.4);            /* secondary con opacidad */
+        }
+
+        .contact-input:focus {
+            border-color: #b8cbbe;                      /* primary */
+            background-color: rgba(27, 46, 36, 0.9);
+            box-shadow: 0 0 0 1px rgba(184, 203, 190, 0.2);
+        }
+
+        .contact-input:hover:not(:focus) {
+            border-color: rgba(141, 146, 141, 0.8);     /* outline */
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface selection:bg-primary/20 selection:text-primary">
+
+    <!-- FONDO ANIMADO WEBGL -->
+    <div id="canvas-container">
+        <canvas height="4772" id="gl-canvas" width="1280"></canvas>
+    </div>
+
+    <!-- CABECERA / NAVEGACIÓN PRINCIPAL -->
+    <header class="w-full top-0 sticky z-50">
+        <div class="bg-surface/80 backdrop-blur-md border-b border-outline-variant/20">
+            <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-20">
+
+                <a class="font-display text-headline-md tracking-tight text-off-white" href="#">GSR</a>
+
+                <nav class="hidden md:flex gap-12">
+                    <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-300 nav-item" href="#work">Work</a>
+                    <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-300 nav-item" href="#process">Process</a>
+                    <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-300 nav-item" href="#about">About</a>
+                    <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-300 nav-item" href="#contact">Contact</a>
+                </nav>
+
+                <a class="hidden md:block bg-primary text-on-primary px-8 py-3 font-label-md text-label-md hover:brightness-110 transition-all duration-300" href="#contact">Contáctame</a>
+
+                <button class="md:hidden text-primary" id="mobile-menu-btn" aria-label="Abrir menú de navegación" aria-expanded="false">
+                    <span class="material-symbols-outlined" id="mobile-menu-icon">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <div
+            id="mobile-menu"
+            class="md:hidden bg-surface/95 backdrop-blur-md border-b border-outline-variant/20 overflow-hidden"
+            style="max-height: 0; transition: max-height 0.35s ease-in-out;"
+            aria-hidden="true"
+        >
+            <nav class="flex flex-col py-4 px-margin-mobile">
+                <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-200 py-4 border-b border-outline-variant/10 mobile-nav-link" href="#work">Work</a>
+                <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-200 py-4 border-b border-outline-variant/10 mobile-nav-link" href="#process">Process</a>
+                <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-200 py-4 border-b border-outline-variant/10 mobile-nav-link" href="#about">About</a>
+                <a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors duration-200 py-4 border-b border-outline-variant/10 mobile-nav-link" href="#contact">Contact</a>
+                <a class="mt-6 mb-2 bg-primary text-surface px-8 py-4 font-label-md text-label-md text-center hover:brightness-110 transition-all mobile-nav-link" href="#contact">Hire Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="relative min-h-[870px] flex items-center justify-center overflow-hidden px-margin-mobile" id="hero">
+            <div class="max-w-container-max mx-auto text-center z-10">
+
+                <span class="inline-block font-label-sm text-label-sm uppercase tracking-[0.2em] text-secondary mb-6 reveal active">
+                    Full Stack Developer &amp; DAW Graduate
+                </span>
+
+                <h1 class="font-display text-headline-lg-mobile md:text-display text-off-white leading-tight max-w-4xl mx-auto mb-8 reveal active">
+                    Soy Gabriel, un apasionado del código que construye
+                    <span class="italic font-normal">experiencias</span> digitales precisas.
+                </h1>
+
+                <p class="font-body-lg text-body-lg text-soft-mint max-w-2xl mx-auto mb-12 reveal active">
+                    Especializado en transformar ideas complejas en interfaces limpias y sistemas escalables.
+                    Mi enfoque combina rigor técnico con empatía por el usuario final.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-6 justify-center reveal active">
+                    <a class="bg-primary text-on-primary px-10 py-4 font-label-md text-label-md transition-all hover:translate-y-[-2px] hover:shadow-lg" href="#work">
+                        Ver Proyectos
+                    </a>
+                    <a class="border border-outline-variant px-10 py-4 font-label-md text-label-md text-off-white hover:bg-surface-container-low/50 transition-all" href="#contact">
+                        Empecemos a hablar
+                    </a>
+                </div>
+            </div>
+
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute -top-24 -left-24 w-72 h-72 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+        </section>
+
+        <!-- SOBRE MÍ -->
+        <section class="py-section-gap px-margin-mobile bg-primary text-on-primary selection:bg-off-white selection:text-surface" id="about">
+            <div class="max-w-container-max mx-auto">
+                <div class="grid md:grid-cols-12 gap-16 items-start">
+
+                    <div class="md:col-span-4 reveal active">
+                        <div class="relative group">
+                            <div class="aspect-[3/4] overflow-hidden border-2 border-on-primary/20 bg-on-primary/5 rounded-lg shadow-2xl transition-transform duration-500 group-hover:-translate-y-2">
+                                <img
+                                    alt="Gabriel - Profile Photo"
+                                    class="w-full h-full object-cover grayscale mix-blend-luminosity hover:grayscale-0 hover:mix-blend-normal transition-all duration-700"
+                                    src="assets/Foto personal.png" />
+                            </div>
+                            <div class="absolute -bottom-4 -right-4 w-24 h-24 border-r-2 border-b-2 border-on-primary/40 -z-10"></div>
+                            <div class="absolute -top-4 -left-4 w-24 h-24 border-l-2 border-t-2 border-on-primary/40 -z-10"></div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-8">
+                        <div class="grid md:grid-cols-12 gap-12">
+
+                            <div class="md:col-span-12 lg:col-span-7">
+                                <span class="font-label-sm text-label-sm text-on-primary/60 tracking-widest uppercase mb-6 block reveal active">
+                                    Sobre mí
+                                </span>
+                                <h2 class="font-display text-headline-lg mb-8 reveal active">Narrativa &amp; Toolkit</h2>
+                                <div class="space-y-6 font-body-lg text-body-lg text-on-primary/80 reveal active">
+                                    <p>
+                                        Mi viaje en el desarrollo comenzó con la curiosidad por cómo funcionaban las
+                                        herramientas que usaba a diario. Hoy, como graduado DAW, he convertido esa
+                                        curiosidad en una metodología de trabajo estructurada.
+                                    </p>
+                                    <p>
+                                        Me apasiona la intersección entre el backend robusto y el frontend delicado.
+                                        Creo que la mejor tecnología es la que se siente invisible para el usuario.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-12 lg:col-span-5">
+                                <div class="bg-on-primary/5 p-8 border border-on-primary/10 reveal active">
+                                    <h3 class="font-label-md text-label-md mb-8 border-b border-on-primary/20 pb-4 uppercase tracking-tighter">
+                                        Technical Stack
+                                    </h3>
+                                    <ul class="space-y-4 font-body-md text-body-md">
+                                        <li class="flex justify-between items-center group">
+                                            <span class="group-hover:translate-x-2 transition-transform">Java &amp; JavaScript</span>
+                                        </li>
+                                        <li class="flex justify-between items-center group">
+                                            <span class="group-hover:translate-x-2 transition-transform">.NET &amp; Express</span>
+                                        </li>
+                                        <li class="flex justify-between items-center group">
+                                            <span class="group-hover:translate-x-2 transition-transform">Python &amp; PHP</span>
+                                        </li>
+                                        <li class="flex justify-between items-center group">
+                                            <span class="group-hover:translate-x-2 transition-transform">MySQL &amp; PostgreSQL</span>
+                                        </li>
+                                        <li class="flex justify-between items-center group">
+                                            <span class="group-hover:translate-x-2 transition-transform">Tailwind &amp; CSS Moderno</span>
+                                        </li>
+                                        <li class="flex justify-between items-center group">
+                                            <span class="group-hover:translate-x-2 transition-transform">Git &amp; CI/CD</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FILOSOFÍA DE DESARROLLO -->
+        <section class="py-section-gap px-margin-mobile bg-surface-container-lowest/20" id="process">
+            <div class="max-w-container-max mx-auto">
+                <div class="grid md:grid-cols-2 gap-20 items-center">
+
+                    <div>
+                        <h2 class="font-display text-headline-lg text-off-white mb-8 reveal active">
+                            Filosofía de Desarrollo
+                        </h2>
+                        <p class="font-body-md text-body-md text-soft-mint mb-12 reveal active">
+                            Como graduado en Desarrollo de Aplicaciones Web, entiendo que el código no es solo una
+                            instrucción para la máquina, sino una solución para una persona. Busco la excelencia
+                            a través de la simplicidad.
+                        </p>
+
+                        <div class="space-y-12">
+                            <div class="flex gap-6 reveal active">
+                                <span class="text-primary">
+                                    <span class="material-symbols-outlined text-4xl">psychology</span>
+                                </span>
+                                <div>
+                                    <h3 class="font-label-md text-label-md text-off-white mb-2">Aprendizaje Continuo</h3>
+                                    <p class="font-body-md text-body-md text-soft-mint">
+                                        El ecosistema web evoluciona cada día. Mi compromiso es la curiosidad constante
+                                        por las mejores prácticas y nuevas tecnologías.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6 reveal active">
+                                <span class="text-primary">
+                                    <span class="material-symbols-outlined text-4xl">favorite</span>
+                                </span>
+                                <div>
+                                    <h3 class="font-label-md text-label-md text-off-white mb-2">Empatía con el Usuario</h3>
+                                    <p class="font-body-md text-body-md text-soft-mint">
+                                        Diseño desde la lógica del usuario, priorizando la accesibilidad, el rendimiento
+                                        y la facilidad de uso en cada línea de código.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative reveal active">
+                        <div class="aspect-[4/5] bg-surface-container overflow-hidden border border-outline-variant/30">
+                            <img
+                                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 opacity-80 hover:opacity-100"
+                                data-alt="A clean, minimalist workspace"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXI9HuwfdDbtSHM6VUyWywLL-xbDS19KeWxk7P_M0rH8bXEnZfmlAQY_9KA1BLJf6x33PgB5HjHRdT2lsV90xhtzOEghrL_uDScHKUJKZZUsQ4CaIZb06QecBxbAYJNIh_Rq9VYYJQrwm0Zop_CuhZrK9zT5zwvZfHqy-CvGpMt0OaeeDveheuXwWUzRL5aHgVz2eRMFIobF74YszupJ4UXBruMgdTeBaPkrdX7yhy2MpuJNLRta_nI2LsyWoV4Crl-rMootoe0TuI" />
+                        </div>
+                        <div class="absolute -bottom-8 -left-8 bg-primary text-on-primary p-12 hidden md:block">
+                            <p class="font-display italic text-headline-md leading-tight">
+                                "Code is poetry,<br />architecture is art."
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS -->
+        <section class="py-section-gap px-margin-mobile" id="work">
+            <div class="max-w-container-max mx-auto">
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                    <div>
+                        <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase mb-4 block reveal active">
+                            Portafolio Seleccionado
+                        </span>
+                        <h2 class="font-display text-headline-lg text-off-white reveal active">Proyectos Técnicos</h2>
+                    </div>
+                    <p class="font-body-md text-body-md text-soft-mint max-w-md reveal active">
+                        Una muestra de soluciones desarrolladas con enfoque en escalabilidad, seguridad y UI/UX moderno.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+
+                    <div class="group reveal active">
+                        <div class="aspect-square bg-surface-container/50 overflow-hidden border border-outline-variant/30 mb-8 relative">
+                            <img
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
+                                data-alt="E-commerce dashboard"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtIWVZFeSv8s55Qgj0hkwPl9bOY5vzjkDPRbfA9Wd5kKQSl1pkg9i43L_Tc8HNWRuHWWnx1ZXyRByLE8dNGoYV-WUuyBVRhgtjVmbRaw4--mHB7j48MJmgmKmMMse16AGGYhOV9673KDc06klL3fmkBrYdGpf9DSHiCjzer45gECAwhQhAbYp0YtqOKHwFnB3cwuYeMr4OmCJHWQhv7F2mpLiQBbv8PL3uxjCcoss0EScfR5ptC7RHKACRZjJhnk11aZwGdyIL4WWN" />
+                            <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                <a class="bg-off-white text-surface px-6 py-3 font-label-md text-label-md" href="#">Demo</a>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 mb-3">
+                            <span class="font-label-sm text-label-sm px-3 py-1 bg-primary-container text-primary-fixed-dim rounded-sm">.NET</span>
+                            <span class="font-label-sm text-label-sm px-3 py-1 bg-primary-container text-primary-fixed-dim rounded-sm">MySQL</span>
+                        </div>
+                        <h3 class="font-display text-headline-md text-off-white mb-2">Modern TPV</h3>
+                        <p class="font-body-md text-body-md text-soft-mint italic mb-4">
+                            "Creado para optimizar los antiguos sistemas de negocios locales mediante una nueva interfaz mucho mas intuitiva y visual."
+                        </p>
+                    </div>
+
+                    <div class="group reveal active" style="transition-delay: 100ms;">
+                        <div class="aspect-square bg-surface-container/50 overflow-hidden border border-outline-variant/30 mb-8 relative">
+                            <img
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
+                                data-alt="Analytical dashboard"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZjDRNJib8aUn_kFcKutO1hh19T3Du764xS3OCFKJZ7tv0L_xU2qtIad343_s2GqxR-vQsvvz4arch78Rl9YVIqq5ghK9jBoylponB1sAPHlMkAePJerRPY0QTNRm8ufGjEpNXf4wGI3uwcq43HwbOCUjSpkHDabujRb-YCYh3hnihXm4yE5i0ZI3D1iRxfYc2p3PTPhMlxmIJZ7bHW0CoXxbVF0-F2S4ewLV8NaZh_FnYBZkk_hMC29CQTFDic8OI2i8aVzPDT9gf" />
+                            <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                <span class="bg-off-white text-surface px-6 py-3 font-label-md text-label-md">Ver Caso de Estudio</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 mb-3">
+                            <span class="font-label-sm text-label-sm px-3 py-1 bg-primary-container text-primary-fixed-dim rounded-sm">Dashboard</span>
+                            <span class="font-label-sm text-label-sm px-3 py-1 bg-primary-container text-primary-fixed-dim rounded-sm">SQL</span>
+                        </div>
+                        <h3 class="font-display text-headline-md text-off-white mb-2">DataViz Control</h3>
+                        <p class="font-body-md text-body-md text-soft-mint italic mb-4">
+                            "Diseñado para visualizar KPIs complejos con una carga cognitiva mínima."
+                        </p>
+                    </div>
+
+                    <div class="group reveal active" style="transition-delay: 200ms;">
+                        <div class="aspect-square bg-surface-container/50 overflow-hidden border border-outline-variant/30 mb-8 relative">
+                            <img
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80"
+                                data-alt="CMS Interface"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf_hY7iBtoej3vstKmjm9hpapzWl8AZxWGhzOwCAtRDkXSd6Wuo61PYGJF--AH5RR6UtrJQnDbo4RTGSuLIjna-_mGcWKAekmvf1uOvAiY7ez3StHqceEsF7ba6xlP1gXt4HM4LUvmU3IhR3NHj-Hseoc7bvSd6s6mYGF4-Do95AurEUsd-l27qGva_l4LbxT83t-kukvYxjN1bb0AkisGb_BOTXLe6T6o0ac4-C1_GiKKUGLVa7D531wn4mLx1BS6ldHl0b3V_L2a" />
+                            <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                <span class="bg-off-white text-surface px-6 py-3 font-label-md text-label-md">Ver Caso de Estudio</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 mb-3">
+                            <span class="font-label-sm text-label-sm px-3 py-1 bg-primary-container text-primary-fixed-dim rounded-sm">CMS</span>
+                            <span class="font-label-sm text-label-sm px-3 py-1 bg-primary-container text-primary-fixed-dim rounded-sm">Tailwind</span>
+                        </div>
+                        <h3 class="font-display text-headline-md text-off-white mb-2">Personal CMS</h3>
+                        <p class="font-body-md text-body-md text-soft-mint italic mb-4">
+                            "Un sistema ligero para creadores de contenido que valoran la velocidad de carga."
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECCIÓN CONTACTO — FORMULARIO
+        ══════════════════════════════════════════════════════════ -->
+        <section class="py-section-gap px-margin-mobile" id="contact">
+            <div class="max-w-container-max mx-auto text-center mb-20">
+                <h2 class="font-display text-headline-lg text-off-white mb-6 reveal active">"Let's grab a coffee"</h2>
+                <p class="font-body-lg text-body-lg text-soft-mint max-w-xl mx-auto reveal active">
+                    ¿Tienes un proyecto en mente o simplemente quieres charlar sobre tecnología?
+                    Siempre estoy abierto a nuevas colaboraciones.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto reveal active">
+
+                <!-- FORMULARIO -->
+                <form class="grid md:grid-cols-2 gap-8 bg-surface-container p-8 md:p-16 border border-outline-variant/40 backdrop-blur-sm" 
+                action="https://formsubmit.co/gabrielsuarezdev@gmail.com"
+                method="POST">
+
+                    <!-- Campo: Nombre -->
+                    <div class="space-y-2">
+                        <label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest block">Nombre</label>
+                        <input
+                            name="nombre"
+                            class="contact-input"
+                            placeholder="Gabriel Suárez"
+                            type="text" />
+                    </div>
+
+                    <!-- Campo: Email -->
+                    <div class="space-y-2">
+                        <label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest block">Email</label>
+                        <input
+                            name="email"
+                            class="contact-input"
+                            placeholder="gabriel@example.com"
+                            type="email" />
+                    </div>
+
+                    <!-- Campo: Mensaje -->
+                    <div class="md:col-span-2 space-y-2">
+                        <label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest block">Mensaje</label>
+                        <textarea
+                            name="mensaje"
+                            class="contact-input"
+                            placeholder="Cuéntame sobre tu idea..."
+                            rows="5"></textarea>
+                    </div>
+
+                    <!-- Botón de envío -->
+                    <div class="md:col-span-2 pt-4">
+                        <button
+                            class="w-full bg-primary text-on-primary py-5 font-label-md text-label-md uppercase tracking-widest hover:brightness-110 transition-all"
+                            type="submit">
+                            Enviar mensaje
+                        </button>
+                    </div>
+                </form>
+
+                <!-- DATOS DE CONTACTO DIRECTO -->
+                <div class="mt-16 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-outline-variant/20 pt-12">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">mail</span>
+                        <span class="font-body-md text-body-md text-soft-mint">gabrielsuarezdev@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">call</span>
+                        <span class="font-body-md text-body-md text-soft-mint">+34 622 444 104</span>
+                    </div>
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">location_on</span>
+                        <span class="font-body-md text-body-md text-soft-mint">Sanlucar de Barrameda, Cadiz</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-outline-variant/10 bg-surface-container-lowest/40 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop gap-8">
+            <span class="font-display text-headline-md text-off-white">GSR</span>
+            <p class="font-label-sm text-label-sm text-secondary">
+                © 2025 GSR. ALL RIGHTS RESERVED.
+            </p>
+            <div class="flex gap-8">
+                <a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/gabriel-su%C3%A1rez-romero/">LinkedIn</a>
+                <a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors duration-300" href="https://www.instagram.com/gabrielsuaarezz_/">Instagram</a>
+                <a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors duration-300" href="mailto:gabrielsuarezdev@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        /* ════════════════════════════════════════════════════════════
+           BLOQUE 1: FONDO ANIMADO CON WEBGL Y SHADERS GLSL
+        ══════════════════════════════════════════════════════════ */
+
+        const canvas = document.getElementById('gl-canvas');
+        const gl = canvas.getContext('webgl');
+
+        if (!gl) {
+            console.error('WebGL no es compatible con este navegador.');
+        } else {
+
+            const vertexShaderSource = `
+                attribute vec2 a_position;
+                varying vec2 v_texCoord;
+
+                void main() {
+                    v_texCoord = a_position * 0.5 + 0.5;
+                    v_texCoord.y = 1.0 - v_texCoord.y;
+                    gl_Position = vec4(a_position, 0.0, 1.0);
+                }
+            `;
+
+            const fragmentShaderSource = `
+                precision highp float;
+                varying vec2 v_texCoord;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+
+                vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+
+                float snoise(vec2 v){
+                    const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                             -0.577350269189626, 0.024390243902439);
+                    vec2 i  = floor(v + dot(v, C.yy));
+                    vec2 x0 = v - i + dot(i, C.xx);
+                    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                    vec4 x12 = x0.xyxy + C.xxzz;
+                    x12.xy -= i1;
+                    i = mod(i, 289.0);
+                    vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0))
+                             + i.x + vec3(0.0, i1.x, 1.0));
+                    vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+                                dot(x12.zw,x12.zw)), 0.0);
+                    m = m*m;
+                    m = m*m;
+                    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                    vec3 h = abs(x) - 0.5;
+                    vec3 ox = floor(x + 0.5);
+                    vec3 a0 = x - ox;
+                    m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                    vec3 g;
+                    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+                    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                    return 130.0 * dot(m, g);
+                }
+
+                void main() {
+                    vec2 uv = v_texCoord;
+                    vec3 color1 = vec3(0.02, 0.09, 0.05);
+                    vec3 color2 = vec3(0.10, 0.21, 0.16);
+                    vec3 color3 = vec3(0.07, 0.15, 0.11);
+                    float noise1 = snoise(uv * 1.5 + u_time * 0.05);
+                    float noise2 = snoise(uv * 2.5 - u_time * 0.03);
+                    vec2 movement = vec2(
+                        snoise(uv * 0.8 + u_time * 0.02),
+                        snoise(uv * 1.2 - u_time * 0.04)
+                    );
+                    float finalNoise = snoise(uv * 1.0 + movement * 0.4);
+                    vec3 finalColor = mix(color1, color3, smoothstep(-0.6, 0.6, finalNoise));
+                    finalColor = mix(finalColor, color2, smoothstep(0.6, 1.0, noise1) * 0.12);
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const program = gl.createProgram();
+            gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vertexShaderSource));
+            gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource));
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(
+                gl.ARRAY_BUFFER,
+                new Float32Array([-1, -1,  1, -1,  -1, 1,  -1, 1,  1, -1,  1, 1]),
+                gl.STATIC_DRAW
+            );
+
+            const positionLocation = gl.getAttribLocation(program, 'a_position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const timeLocation       = gl.getUniformLocation(program, 'u_time');
+            const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+
+            function render(time) {
+                time *= 0.001;
+                if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+                    canvas.width  = canvas.clientWidth;
+                    canvas.height = canvas.clientHeight;
+                    gl.viewport(0, 0, canvas.width, canvas.height);
+                }
+                gl.uniform1f(timeLocation, time);
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+
+            requestAnimationFrame(render);
+        }
+
+
+        /* ════════════════════════════════════════════════════════════
+           BLOQUE 2: ANIMACIÓN DE REVELADO AL HACER SCROLL
+        ══════════════════════════════════════════════════════════ */
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight   = window.innerHeight;
+                var elementTop     = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+
+        /* ════════════════════════════════════════════════════════════
+           BLOQUE 3: MENÚ MÓVIL
+        ══════════════════════════════════════════════════════════ */
+
+        const mobileMenuBtn  = document.getElementById('mobile-menu-btn');
+        const mobileMenu     = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+        let menuAbierto = false;
+
+        function toggleMenu() {
+            menuAbierto = !menuAbierto;
+            if (menuAbierto) {
+                mobileMenu.style.maxHeight = '500px';
+                mobileMenuIcon.textContent = 'close';
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                mobileMenuBtn.setAttribute('aria-label', 'Cerrar menú de navegación');
+                mobileMenu.setAttribute('aria-hidden', 'false');
+            } else {
+                cerrarMenu();
+            }
+        }
+
+        function cerrarMenu() {
+            menuAbierto = false;
+            mobileMenu.style.maxHeight = '0';
+            mobileMenuIcon.textContent = 'menu';
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', cerrarMenu);
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                cerrarMenu();
+            }
+        });
+
+
+        /* ════════════════════════════════════════════════════════════
+           BLOQUE 4A: SCROLL SUAVE PARA ENLACES ANCLA
+        ══════════════════════════════════════════════════════════ */
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+
+        /* ════════════════════════════════════════════════════════════
+           BLOQUE 4B: ESTADO ACTIVO EN LA NAVEGACIÓN
+        ══════════════════════════════════════════════════════════ */
+
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop    = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary', 'font-bold', 'border-b', 'border-primary', 'pb-1');
+                link.classList.add('text-secondary');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('text-primary', 'font-bold', 'border-b', 'border-primary', 'pb-1');
+                    link.classList.remove('text-secondary');
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
