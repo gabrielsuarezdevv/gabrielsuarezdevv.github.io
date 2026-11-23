@@ -462,9 +462,9 @@
 
                 <!-- FORMULARIO -->
                 <form class="grid md:grid-cols-2 gap-8 bg-surface-container p-8 md:p-16 border border-outline-variant/40 backdrop-blur-sm" 
-                action="https://formsubmit.co/gabrielsuarezdev@gmail.com"
+                action="https://api.web3forms.com/submit"
                 method="POST">
-
+                    <input type="hidden" name="access_key" value="1723aabf-0968-4b85-8d05-5b122cd012d7">
                     <!-- Campo: Nombre -->
                     <div class="space-y-2">
                         <label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest block">Nombre</label>
@@ -472,7 +472,8 @@
                             name="nombre"
                             class="contact-input"
                             placeholder="Gabriel Suárez"
-                            type="text" />
+                            type="text"
+                            required/>
                     </div>
 
                     <!-- Campo: Email -->
@@ -482,7 +483,8 @@
                             name="email"
                             class="contact-input"
                             placeholder="gabriel@example.com"
-                            type="email" />
+                            type="email"
+                            required />
                     </div>
 
                     <!-- Campo: Mensaje -->
@@ -492,7 +494,8 @@
                             name="mensaje"
                             class="contact-input"
                             placeholder="Cuéntame sobre tu idea..."
-                            rows="5"></textarea>
+                            rows="5"
+                            required></textarea>
                     </div>
 
                     <!-- Botón de envío -->
